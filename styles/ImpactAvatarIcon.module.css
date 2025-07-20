@@ -1,14 +1,14 @@
-.impact-wrapper {
+.impactWrapper {
   position: relative;
   display: inline-block;
 }
 
-.impact-avatar-container {
+.impactAvatarContainer {
   animation: drop-in 0.8s ease-out forwards;
   transform: translateY(-200px);
 }
 
-.impact-avatar {
+.impactAvatar {
   width: 100px;
   height: 100px;
 }
@@ -25,7 +25,7 @@
   }
 }
 
-.ripple-circle {
+.rippleCircle {
   fill: none;
   stroke: orange;
   stroke-width: 4;
@@ -43,7 +43,7 @@
   }
 }
 
-.impact-info-box {
+.impactInfoBox {
   position: absolute;
   top: 110%;
   left: 50%;
