@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Resume.module.css';
-import AnimatedBackground from '../components/AnimatedBackground';
+import Particles from '../components/Particles';
 import SplashCursor from '../components/SplashCursor';
 
 export default function Resume() {
@@ -93,8 +93,28 @@ export default function Resume() {
       <SplashCursor />  {/* ← activating splash cursor */}
 
       <div className={styles.body}>
-        <AnimatedBackground/>
-        <div className={styles.header}>
+  <div style={{
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    background: '#1a1a2e',
+    zIndex: 1
+  }}>
+    <Particles
+      particleColors={['#ffffff', '#667eea', '#764ba2']}
+      particleCount={300}
+      particleSpread={15}
+      speed={0.3}
+      particleBaseSize={80}
+      moveParticlesOnHover={true}
+      alphaParticles={false}
+      disableRotation={false}
+    />
+  </div>
+  <div className={styles.header}>
+    
           <h1>Shazil Nazir Sindhu</h1>
           <div className={styles.tagline}>Strategic SaaS Product Leader | AI-Driven Growth | 0→1 Execution</div>
           <div className={styles.contact}>
