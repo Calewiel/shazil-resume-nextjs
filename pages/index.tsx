@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Resume.module.css';
-import AnimatedBackground from '../components/AnimatedBackground.tsx';
+import AnimatedBackground from '../components/AnimatedBackground';
 
 export default function Resume() {
   useEffect(() => {
