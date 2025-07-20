@@ -1,6 +1,7 @@
 /* Global styles for the body wrapper */
 .body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* background removed - now handled by AnimatedBackground */
   min-height: 100vh;
   padding: 20px;
   overflow-x: auto;
