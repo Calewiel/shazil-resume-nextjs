@@ -1,23 +1,23 @@
 import React, { useState } from "react";
-import "./ImpactAvatarIcon.css";
+import styles from '../styles/ImpactAvatarIcon.module.css';
 
 const ImpactAvatarIcon = () => {
   const [showInfo, setShowInfo] = useState(false);
-
+  
   return (
     <div
-      className="impact-wrapper"
+      className={styles.impactWrapper}
       onMouseEnter={() => setShowInfo(true)}
       onMouseLeave={() => setShowInfo(false)}
     >
-      <div className="impact-avatar-container">
+      <div className={styles.impactAvatarContainer}>
         {/* Avatar SVG */}
         <svg
-          className="impact-avatar"
+          className={styles.impactAvatar}
           viewBox="0 0 200 200"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g className="avatar-body">
+          <g className={styles.avatarBody}>
             <circle cx="100" cy="100" r="50" fill="#333" />
             <text
               x="100"
@@ -30,14 +30,14 @@ const ImpactAvatarIcon = () => {
               PM
             </text>
           </g>
-          <g className="impact-ripple">
-            <circle cx="100" cy="170" r="0" className="ripple-circle" />
+          <g className={styles.impactRipple}>
+            <circle cx="100" cy="170" r="0" className={styles.rippleCircle} />
           </g>
         </svg>
       </div>
       {showInfo && (
-        <div className="impact-info-box">
-          <p>This icon represents impact. Hover to learn more!</p>
+        <div className={styles.impactInfoBox}>
+          <p>Strategic Product Leader | Framework Creator</p>
         </div>
       )}
     </div>
