@@ -48,11 +48,11 @@ html, body {
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
-  height: 750px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 20px;
+  height: 100vh;
+  background: none;
+  border-radius: 0;
   padding: 40px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: none;
   z-index: 10;
 }
 
