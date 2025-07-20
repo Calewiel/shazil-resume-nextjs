@@ -1,7 +1,6 @@
 /* Global styles for the body wrapper */
 .body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #1a1a1a;  /* Simple dark background */  
   min-height: 100vh;
   padding: 20px;
   overflow-x: auto;
