@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Resume.module.css';
+import AnimatedBackground from '../components/AnimatedBackgound;
 
 export default function Resume() {
   useEffect(() => {
@@ -89,6 +90,7 @@ export default function Resume() {
       </Head>
       
       <div className={styles.body}>
+        <AnimatedBackground/>
         <div className={styles.header}>
           <h1>Shazil Nazir Sindhu</h1>
           <div className={styles.tagline}>Strategic SaaS Product Leader | AI-Driven Growth | 0→1 Execution</div>
