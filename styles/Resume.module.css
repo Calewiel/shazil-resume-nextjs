@@ -1,83 +1,85 @@
-
-/* Global styles for the body wrapper */
 .body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  /* background removed - now handled by AnimatedBackground */
-  min-height: 100vh;
   height: 100vh;
-  padding: 0px;
+  padding: 0;
   overflow: hidden;
   margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Header styles */
+/* Compact header */
 .header {
   text-align: center;
   color: white;
-  margin-bottom: 30px;
-  position: relative;    /* ← Add this */
-  z-index: 10;          /* ← Add this */
+  padding: 15px 20px;  /* ← Reduced from 30px margin */
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;      /* ← Don't shrink */
 }
 
 .header h1 {
-  font-size: 2.5em;
+  font-size: 2em;      /* ← Reduced from 2.5em */
   font-weight: 300;
-  margin-bottom: 8px;
+  margin-bottom: 6px;  /* ← Reduced from 8px */
   letter-spacing: 1px;
 }
 
 .tagline {
-  font-size: 1.1em;
+  font-size: 1em;      /* ← Reduced from 1.1em */
   opacity: 0.9;
-  margin-bottom: 10px;
+  margin-bottom: 8px;  /* ← Reduced from 10px */
 }
 
-.contact {
-  font-size: 0.95em;
-  opacity: 0.8;
-}
-
-/* Career map container */
+/* Compact career map */
 .careerMap {
-  max-width: 1400px;
+  max-width: 1200px;   /* ← Reduced from 1400px */
   margin: 0 auto;
   position: relative;
-  height: 100vh;
+  flex: 1;             /* ← Take remaining space */
   background: none;
   border-radius: 0;
-  padding: 40px;
+  padding: 20px;       /* ← Reduced from 40px */
   backdrop-filter: none;
   z-index: 10;
+  min-height: 0;       /* ← Allow shrinking */
 }
 
-/* SVG path styles */
-.path {
-  stroke: rgba(255,255,255,0.9);
-  stroke-width: 4;
-  fill: none;
+/* Reposition career nodes - more compact */
+.educationNode {
+  left: 12%;           /* ← Moved in from 8% */
+  top: 75%;            /* ← Moved up from 68% */
 }
 
-/* Career node base styles */
-.careerNode {
-  position: absolute;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.bridgeblueNode {
+  left: 28%;           /* ← Moved in from 22% */
+  top: 65%;            /* ← Moved up from 58% */
 }
 
-.careerNode:hover {
-  transform: scale(1.05);
-  z-index: 100;
+.halfortNode {
+  left: 44%;           /* ← Moved in from 42% */
+  top: 45%;            /* ← Moved up from 42% */
 }
 
-/* Node icon styles */
+.stukentNode {
+  left: 62%;           /* ← Moved in from 65% */
+  top: 30%;            /* ← Moved up from 28% */
+}
+
+.frameworkNode {
+  left: 78%;           /* ← Moved in from 84% */
+  top: 20%;            /* ← Moved up from 18% */
+}
+
+/* Compact node icons */
 .nodeIcon {
-  width: 60px;
-  height: 60px;
+  width: 50px;         /* ← Reduced from 60px */
+  height: 50px;        /* ← Reduced from 60px */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8em;
+  font-size: 1.5em;    /* ← Reduced from 1.8em */
   color: white;
   border: 3px solid white;
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
@@ -85,42 +87,14 @@
   z-index: 10;
 }
 
-/* Individual node colors */
-.educationNode .nodeIcon {
-  background: linear-gradient(135deg, #34495e, #2c3e50);
-}
-
-.bridgeblueNode .nodeIcon {
-  background: linear-gradient(135deg, #3498db, #2980b9);
-}
-
-.halfortNode .nodeIcon {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
-}
-
-.stukentNode .nodeIcon {
-  background: linear-gradient(135deg, #f39c12, #e67e22);
-}
-
-.frameworkNode .nodeIcon {
-  background: linear-gradient(135deg, #9b59b6, #8e44ad);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
-  50% { box-shadow: 0 8px 30px rgba(155,89,182,0.6); }
-  100% { box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
-}
-
-/* Info popup base styles */
+/* Compact info popups */
 .infoPopup {
   position: absolute;
   background: white;
-  border-radius: 15px;
-  padding: 20px;
-  min-width: 320px;
-  max-width: 380px;
+  border-radius: 12px;  /* ← Reduced from 15px */
+  padding: 15px;        /* ← Reduced from 20px */
+  min-width: 280px;     /* ← Reduced from 320px */
+  max-width: 320px;     /* ← Reduced from 380px */
   box-shadow: 0 15px 40px rgba(0,0,0,0.2);
   opacity: 0;
   visibility: hidden;
@@ -129,247 +103,61 @@
   z-index: 20;
 }
 
-.careerNode:hover .infoPopup {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-/* Popup content styles */
-.popupDate {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  padding: 6px 15px;
-  border-radius: 15px;
-  font-size: 0.8em;
-  font-weight: 600;
-  display: inline-block;
-  margin-bottom: 10px;
-}
-
-.popupTitle {
-  font-size: 1.4em;
-  color: #2c3e50;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.popupCompany {
-  color: #667eea;
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
-.popupHighlight {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  padding: 12px;
-  border-radius: 8px;
-  margin: 10px 0;
-  font-size: 0.9em;
-  font-weight: 500;
-}
-
-.popupAchievement {
-  display: flex;
-  align-items: center;
-  margin: 8px 0;
-  font-size: 0.85em;
-  line-height: 1.4;
-}
-
-.popupAchievement .icon {
-  margin-right: 8px;
-  font-size: 1em;
-}
-
-.metric {
-  color: #e74c3c;
-  font-weight: 700;
-}
-
-/* Badges */
-.badges {
-  margin: 10px 0;
-}
-
-.badge {
-  display: inline-block;
-  background: rgba(102, 126, 234, 0.1);
-  color: #667eea;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.75em;
-  font-weight: 600;
-  margin: 2px;
-  border: 1px solid rgba(102, 126, 234, 0.3);
-}
-
-/* Node positioning */
-.educationNode {
-  left: 8%;
-  top: 68%;
-}
-
-.bridgeblueNode {
-  left: 22%;
-  top: 58%;
-}
-
-.halfortNode {
-  left: 42%;
-  top: 42%;
-}
-
-.stukentNode {
-  left: 65%;
-  top: 28%;
-}
-
-.frameworkNode {
-  left: 84%;
-  top: 18%;
-}
-
-/* Popup positioning */
+/* Adjust popup positions to fit screen */
 .educationPopup {
-  left: 70px;
+  left: 60px;           /* ← Reduced from 70px */
   top: -10px;
 }
 
 .bridgebluePopup {
-  left: -160px;
-  top: 70px;
+  left: -140px;         /* ← Reduced from -160px */
+  top: 60px;            /* ← Reduced from 70px */
 }
 
 .halfortPopup {
-  left: -200px;
+  left: -180px;         /* ← Reduced from -200px */
   top: -10px;
 }
 
 .stukentPopup {
-  left: -320px;
-  top: 70px;
+  left: -280px;         /* ← Reduced from -320px */
+  top: 60px;            /* ← Reduced from 70px */
 }
 
 .frameworkPopup {
-  left: -360px;
+  left: -320px;         /* ← Reduced from -360px */
   top: -10px;
 }
 
-/* Legend styles */
+/* Compact legend */
 .legend {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 15px;         /* ← Reduced from 20px */
+  right: 15px;          /* ← Reduced from 20px */
   background: rgba(255,255,255,0.9);
-  padding: 20px;
-  border-radius: 15px;
+  padding: 15px;        /* ← Reduced from 20px */
+  border-radius: 12px;  /* ← Reduced from 15px */
   backdrop-filter: blur(10px);
+  font-size: 0.85em;    /* ← Reduced size */
 }
 
 .legend h3 {
   color: #2c3e50;
-  margin-bottom: 15px;
-  font-size: 1.1em;
+  margin-bottom: 10px;  /* ← Reduced from 15px */
+  font-size: 1em;       /* ← Reduced from 1.1em */
 }
 
 .legendItem {
   display: flex;
   align-items: center;
-  margin: 8px 0;
-  font-size: 0.9em;
+  margin: 6px 0;        /* ← Reduced from 8px */
+  font-size: 0.8em;     /* ← Reduced from 0.9em */
 }
 
 .legendColor {
-  width: 20px;
-  height: 20px;
+  width: 16px;          /* ← Reduced from 20px */
+  height: 16px;         /* ← Reduced from 20px */
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 8px;    /* ← Reduced from 10px */
   border: 2px solid white;
-}
-
-.educationColor {
-  background: linear-gradient(135deg, #34495e, #2c3e50);
-}
-
-.bridgeblueColor {
-  background: linear-gradient(135deg, #3498db, #2980b9);
-}
-
-.halfortColor {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
-}
-
-.stukentColor {
-  background: linear-gradient(135deg, #f39c12, #e67e22);
-}
-
-.frameworkColor {
-  background: linear-gradient(135deg, #9b59b6, #8e44ad);
-}
-
-/* Stats panel styles */
-.statsPanel {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: rgba(255,255,255,0.9);
-  padding: 25px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  min-width: 250px;
-}
-
-.statsPanel h3 {
-  color: #2c3e50;
-  margin-bottom: 15px;
-  font-size: 1.2em;
-  text-align: center;
-}
-
-.statItem {
-  display: flex;
-  justify-content: space-between;
-  margin: 12px 0;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(102, 126, 234, 0.2);
-}
-
-.statLabel {
-  color: #2c3e50;
-  font-size: 0.9em;
-}
-
-.statValue {
-  color: #e74c3c;
-  font-weight: 700;
-  font-size: 0.9em;
-}
-
-/* Mobile responsive styles */
-@media (max-width: 768px) {
-  .careerMap {
-    height: 600px;
-    padding: 20px;
-  }
-  
-  .infoPopup {
-    position: fixed !important;
-    left: 50% !important;
-    top: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    max-width: 90vw;
-    z-index: 1000;
-  }
-  
-  .statsPanel, .legend {
-    position: relative;
-    margin: 20px auto;
-    float: none;
-  }
-  
-  .header h1 {
-    font-size: 1.8em;
-  }
 }
