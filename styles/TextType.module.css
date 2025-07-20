@@ -1,0 +1,18 @@
+.textType {
+  display: inline-block;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.textTypeContent {
+  display: inline;
+}
+
+.textTypeCursor {
+  display: inline;
+  font-weight: normal;
+  color: #ffffff;
+}
+
+.textTypeCursorHidden {
+  opacity: 0;
+}
