@@ -1,7 +1,8 @@
 /* Global styles for the body wrapper */
 .body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);  min-height: 100vh;
+  background: #1a1a1a;  /* Simple dark background */  
+  min-height: 100vh;
   padding: 20px;
   overflow-x: auto;
   margin: 0;
