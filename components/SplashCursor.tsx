@@ -23,18 +23,33 @@ function SplashCursor({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    function pointerPrototype() {
-      this.id = -1;
-      this.texcoordX = 0;
-      this.texcoordY = 0;
-      this.prevTexcoordX = 0;
-      this.prevTexcoordY = 0;
-      this.deltaX = 0;
-      this.deltaY = 0;
-      this.down = false;
-      this.moved = false;
-      this.color = [0, 0, 0];
-    }
+  interface PointerType {
+  id: number;
+  texcoordX: number;
+  texcoordY: number;
+  prevTexcoordX: number;
+  prevTexcoordY: number;
+  deltaX: number;
+  deltaY: number;
+  down: boolean;
+  moved: boolean;
+  color: number[];
+}
+
+function createPointer(): PointerType {
+  return {
+    id: -1,
+    texcoordX: 0,
+    texcoordY: 0,
+    prevTexcoordX: 0,
+    prevTexcoordY: 0,
+    deltaX: 0,
+    deltaY: 0,
+    down: false,
+    moved: false,
+    color: [0, 0, 0]
+  };
+}
 
     let config = {
       SIM_RESOLUTION,
@@ -54,8 +69,8 @@ function SplashCursor({
       TRANSPARENT,
     };
 
-    let pointers = [new pointerPrototype()];
-
+let pointers = [createPointer()];
+    
     const { gl, ext } = getWebGLContext(canvas);
     if (!ext.supportLinearFiltering) {
       config.DYE_RESOLUTION = 256;
