@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Resume.module.css';
 import AnimatedBackground from '../components/AnimatedBackground';
+import SplashCursor from '../components/SplashCursor';
 
 export default function Resume() {
   useEffect(() => {
@@ -88,7 +89,9 @@ export default function Resume() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
       </Head>
-      
+          
+      <SplashCursor />  {/* ← activating splash cursor */}
+
       <div className={styles.body}>
         <AnimatedBackground/>
         <div className={styles.header}>
