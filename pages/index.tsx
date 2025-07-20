@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Resume.module.css';
 import AnimatedBackground from '../components/AnimatedBackground';
+import ImpactAvatarIcon from '../components/ImpactAvatarIcon';
 
 export default function Resume() {
   useEffect(() => {
@@ -121,6 +122,17 @@ export default function Resume() {
   />
 </svg>
 
+{/* Animated Icon in Center */}
+  <div style={{
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    zIndex: 50
+  }}>
+    <ImpactAvatarIcon />
+  </div>
+          
           {/* Education Node */}
           <div className={`${styles.careerNode} ${styles.educationNode}`}>
             <div className={styles.nodeIcon}>
