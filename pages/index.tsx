@@ -4,6 +4,7 @@ import Head from 'next/head';
 import styles from '../styles/Resume.module.css';
 import Particles from '../components/Particles';
 import SplashCursor from '../components/SplashCursor';
+import TextType from '../components/TextType';
 
 export default function Resume() {
   useEffect(() => {
@@ -117,7 +118,26 @@ export default function Resume() {
     
           <h1>Shazil Nazir Sindhu</h1>
           <div className={styles.tagline}>Strategic SaaS Product Leader | AI-Driven Growth | 0→1 Execution</div>
-          <div className={styles.contact}>
+   
+    
+    {/* Add typing effect intro */}
+  <div style={{
+    fontSize: '1.2em',
+    marginTop: '20px',
+    marginBottom: '10px',
+    color: '#ffffff'
+  }}>
+    <TextType 
+      text={["Hello, I am Shazil. Welcome to my interactive resume", "Exploring innovation through product leadership", "Building the future, one product at a time"]}
+      typingSpeed={75}
+      pauseDuration={1500}
+      showCursor={true}
+      cursorCharacter="|"
+      loop={true}
+    />
+  </div>      
+    
+    <div className={styles.contact}>
             📧 snsindhu@gmail.com | 📱 (804) 873-9174 | 💼 in/shazilsindhu | 🌐 scaleframework.notion.site
           </div>
         </div>
