@@ -5,6 +5,7 @@ import styles from '../styles/Resume.module.css';
 import Particles from '../components/Particles';
 import SplashCursor from '../components/SplashCursor';
 import TextType from '../components/TextType';
+import ContactLanyard from '../components/ContactLanyard';
 
 export default function Resume() {
   useEffect(() => {
@@ -93,6 +94,8 @@ export default function Resume() {
           
       <SplashCursor />  {/* ← activating splash cursor */}
 
+      <ContactLanyard /> {/* ← adding contact lanyard */}
+
       <div className={styles.body}>
   <div style={{
     position: 'fixed',
@@ -137,10 +140,9 @@ export default function Resume() {
     />
   </div>      
     
-    <div className={styles.contact}>
-            📧 snsindhu@gmail.com | 📱 (804) 873-9174 | 💼 in/shazilsindhu | 🌐 scaleframework.notion.site
-          </div>
-        </div>
+  </div>
+
+        {/* Career Path SVG */}
 
         <div className={styles.careerMap}>
          

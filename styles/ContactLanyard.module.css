@@ -1,0 +1,78 @@
+.lanyardWrapper {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 200px;
+  height: 300px;
+}
+
+.lanyardContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.lanyardString {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 150px;
+  background: linear-gradient(180deg, #666, #999);
+  transform: translateX(-50%);
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.contactCard {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  background: linear-gradient(145deg, #2c3e50, #34495e);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  transform-origin: top center;
+}
+
+.contactCard:hover {
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.swing {
+  animation: swing 2s ease-in-out infinite;
+}
+
+@keyframes swing {
+  0%, 100% { transform: translateX(-50%) rotate(0deg); }
+  25% { transform: translateX(-50%) rotate(2deg); }
+  75% { transform: translateX(-50%) rotate(-2deg); }
+}
+
+.cardContent h3 {
+  color: #ecf0f1;
+  margin: 0 0 12px 0;
+  font-size: 0.9em;
+  text-align: center;
+  border-bottom: 1px solid #7f8c8d;
+  padding-bottom: 8px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  font-size: 0.8em;
+  color: #bdc3c7;
+}
+
+.icon {
+  margin-right: 8px;
+  font-size: 1em;
+  min-width: 20px;
+}
