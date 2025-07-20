@@ -8,41 +8,40 @@ export default function Resume() {
     const nodes = document.querySelectorAll(`.${styles.careerNode}`);
     
     nodes.forEach(node => {
+      const htmlNode = node as HTMLElement;
+      
       // Hover effects and popup control
-      node.addEventListener('mouseenter', function() {
-        (this as HTMLElement).style.zIndex = '1000';
-        (this as HTMLElement).style.transform = 'scale(1.05)';
+      const handleMouseEnter = () => {
+        htmlNode.style.zIndex = '1000';
+        htmlNode.style.transform = 'scale(1.05)';
         
         // Show popup on hover
-        const popup = this.querySelector(`.${styles.infoPopup}`) as HTMLElement;
+        const popup = htmlNode.querySelector(`.${styles.infoPopup}`) as HTMLElement;
         if (popup) {
           popup.style.opacity = '1';
           popup.style.visibility = 'visible';
         }
-      });
+      };
       
-      node.addEventListener('mouseleave', function() {
-        (this as HTMLElement).style.zIndex = '10';
-        (this as HTMLElement).style.transform = 'scale(1)';
+      const handleMouseLeave = () => {
+        htmlNode.style.zIndex = '10';
+        htmlNode.style.transform = 'scale(1)';
         
         // Hide popup when leaving
-        const popup = this.querySelector(`.${styles.infoPopup}`) as HTMLElement;
+        const popup = htmlNode.querySelector(`.${styles.infoPopup}`) as HTMLElement;
         if (popup) {
           popup.style.opacity = '0';
           popup.style.visibility = 'hidden';
         }
-      });
-    });
+      };
 
-    // Click handling for mobile devices
-    nodes.forEach(node => {
-      node.addEventListener('click', function(e) {
+      const handleClick = (e: Event) => {
         e.preventDefault();
-        const popup = this.querySelector(`.${styles.infoPopup}`) as HTMLElement;
+        const popup = htmlNode.querySelector(`.${styles.infoPopup}`) as HTMLElement;
         
         // Close other popups
         nodes.forEach(otherNode => {
-          if (otherNode !== this) {
+          if (otherNode !== htmlNode) {
             const otherPopup = otherNode.querySelector(`.${styles.infoPopup}`) as HTMLElement;
             if (otherPopup) {
               otherPopup.style.opacity = '0';
@@ -57,15 +56,26 @@ export default function Resume() {
           popup.style.opacity = isVisible ? '0' : '1';
           popup.style.visibility = isVisible ? 'hidden' : 'visible';
         }
-      });
+      };
+
+      node.addEventListener('mouseenter', handleMouseEnter);
+      node.addEventListener('mouseleave', handleMouseLeave);
+      node.addEventListener('click', handleClick);
+
+      // Store cleanup functions
+      (node as any)._cleanup = () => {
+        node.removeEventListener('mouseenter', handleMouseEnter);
+        node.removeEventListener('mouseleave', handleMouseLeave);
+        node.removeEventListener('click', handleClick);
+      };
     });
 
     // Cleanup function
     return () => {
       nodes.forEach(node => {
-        node.removeEventListener('mouseenter', () => {});
-        node.removeEventListener('mouseleave', () => {});
-        node.removeEventListener('click', () => {});
+        if ((node as any)._cleanup) {
+          (node as any)._cleanup();
+        }
       });
     };
   }, []);
