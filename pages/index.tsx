@@ -123,26 +123,9 @@ export default function Resume() {
         </div>
 
         <div className={styles.careerMap}>
+         
           {/* Career Path SVG */}
-  <svg 
-  width="100%" 
-  height="100%" 
-  style={{
-    position: 'absolute', 
-    top: 0, 
-    left: 0,
-    pointerEvents: 'none',  /* ← Add this */
-    zIndex: 1               /* ← Add this */
-  }}
->
-  <path 
-    className={styles.path} 
-    d="M 120 540 Q 180 520 310 460 Q 450 380 590 330 Q 720 260 890 210 Q 1000 170 1180 140" 
-    stroke="rgba(255,255,255,0.3)"  /* ← Make it more subtle */
-    strokeWidth="2"                  /* ← Make it thinner */
-    fill="none"
-  />
-</svg>
+
           
           {/* Education Node */}
           <div className={`${styles.careerNode} ${styles.educationNode}`}>
