@@ -5,8 +5,9 @@
   left: 0;
   width: 100%;
   height: 100%;
+  background: #1a1a2e;  /* ← Add a sophisticated dark navy */
   pointer-events: none;
-  z-index: 100;    /* ← Way higher, in front of everything! */
+  z-index: 100;
   overflow: hidden;
 }
 
