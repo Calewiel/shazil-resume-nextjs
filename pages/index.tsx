@@ -5,7 +5,7 @@ import styles from '../styles/Resume.module.css';
 import Particles from '../components/Particles';
 import SplashCursor from '../components/SplashCursor';
 import TextType from '../components/TextType';
-import ContactLanyard from '../components/ContactLanyard';
+import Lanyard from '../components/Lanyard';
 
 export default function Resume() {
   useEffect(() => {
@@ -93,8 +93,8 @@ export default function Resume() {
       </Head>
           
       <SplashCursor />  {/* ← activating splash cursor */}
-
-      <ContactLanyard /> {/* ← adding contact lanyard */}
+      
+      <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
 
       <div className={styles.body}>
   <div style={{

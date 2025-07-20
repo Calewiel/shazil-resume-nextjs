@@ -13,12 +13,18 @@
     "react": "^18",
     "react-dom": "^18",
     "ogl": "^1.0.6",
-    "gsap": "^3.12.2"
+    "gsap": "^3.12.2",
+    "three": "^0.159.0",
+    "meshline": "^3.1.6",
+    "@react-three/fiber": "^8.15.12",
+    "@react-three/drei": "^9.92.7",
+    "@react-three/rapier": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/three": "^0.159.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "typescript": "^5"

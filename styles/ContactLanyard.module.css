@@ -1,10 +1,10 @@
 .lanyardWrapper {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 15px;
+  right: 15px;
   z-index: 100;
-  width: 200px;
-  height: 300px;
+  width: 280px;  /* Increased from 200px */
+  height: 450px; /* Increased from 300px */
 }
 
 .lanyardContainer {
@@ -17,62 +17,197 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 4px;
-  height: 150px;
-  background: linear-gradient(180deg, #666, #999);
+  width: 6px;        /* Increased from 4px */
+  height: 180px;     /* Increased from 150px */
+  background: linear-gradient(180deg, #555, #777, #999);
   transform: translateX(-50%);
-  border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  border-radius: 3px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+  /* Add some texture */
+  background-image: 
+    linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
 }
 
 .contactCard {
   position: absolute;
-  top: 140px;
+  top: 170px;        /* Adjusted for longer string */
   left: 50%;
   transform: translateX(-50%);
-  width: 180px;
-  background: linear-gradient(145deg, #2c3e50, #34495e);
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
+  width: 260px;      /* Increased from 180px */
+  background: linear-gradient(145deg, #2c3e50, #34495e, #2c3e50);
+  border-radius: 16px; /* Increased border radius */
+  padding: 20px;     /* Increased padding */
+  box-shadow: 
+    0 12px 40px rgba(0,0,0,0.3),
+    0 4px 12px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-origin: top center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 .contactCard:hover {
-  transform: translateX(-50%) scale(1.05);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  transform: translateX(-50%) scale(1.05) translateY(-5px);
+  box-shadow: 
+    0 20px 60px rgba(0,0,0,0.4),
+    0 8px 20px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 .swing {
-  animation: swing 2s ease-in-out infinite;
+  animation: swing 3s ease-in-out infinite;
 }
 
 @keyframes swing {
   0%, 100% { transform: translateX(-50%) rotate(0deg); }
-  25% { transform: translateX(-50%) rotate(2deg); }
-  75% { transform: translateX(-50%) rotate(-2deg); }
+  25% { transform: translateX(-50%) rotate(1.5deg); }
+  75% { transform: translateX(-50%) rotate(-1.5deg); }
 }
 
-.cardContent h3 {
-  color: #ecf0f1;
-  margin: 0 0 12px 0;
-  font-size: 0.9em;
+.cardHeader {
   text-align: center;
-  border-bottom: 1px solid #7f8c8d;
-  padding-bottom: 8px;
+  margin-bottom: 18px;
+  border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+  padding-bottom: 15px;
+}
+
+.cardTitle {
+  color: #3498db;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.cardSubtitle {
+  color: #ecf0f1;
+  font-size: 0.9em;
+  opacity: 0.9;
+  font-weight: 300;
 }
 
 .contactItem {
   display: flex;
   align-items: center;
-  margin: 8px 0;
-  font-size: 0.8em;
-  color: #bdc3c7;
+  margin: 12px 0;    /* Increased spacing */
+  padding: 10px 12px; /* Added padding */
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.contactItem:hover {
+  background: rgba(52, 152, 219, 0.1);
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.contactItem:hover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(180deg, #3498db, #2980b9);
+  border-radius: 0 2px 2px 0;
 }
 
 .icon {
-  margin-right: 8px;
-  font-size: 1em;
-  min-width: 20px;
+  font-size: 1.4em;   /* Increased size */
+  min-width: 28px;    /* Increased */
+  margin-right: 12px;
+  transition: transform 0.3s ease;
+}
+
+.contactItem:hover .icon {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.contactDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.contactLabel {
+  font-size: 0.75em;
+  color: #95a5a6;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.contactValue {
+  font-size: 0.9em;
+  color: #ecf0f1;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.contactItem:hover .contactValue {
+  color: #3498db;
+}
+
+.cardFooter {
+  text-align: center;
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footerText {
+  font-size: 0.8em;
+  color: #7f8c8d;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .lanyardWrapper {
+    width: 240px;
+    right: 10px;
+    top: 10px;
+  }
+  
+  .contactCard {
+    width: 220px;
+    padding: 16px;
+  }
+  
+  .cardTitle {
+    font-size: 1em;
+  }
+  
+  .contactItem {
+    margin: 10px 0;
+    padding: 8px 10px;
+  }
+  
+  .icon {
+    font-size: 1.2em;
+    min-width: 24px;
+  }
+}
+
+/* Cute animation for when hovering over the whole card */
+.contactCard::before {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  font-size: 1.2em;
+  opacity: 0;
+  transform: scale(0) rotate(0deg);
+  transition: all 0.4s ease;
+}
+
+.contactCard:hover::before {
+  opacity: 1;
+  transform: scale(1) rotate(15deg);
 }
