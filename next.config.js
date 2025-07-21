@@ -3,8 +3,33 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   images: {
-    unoptimized: true
-  }
-}
+    unoptimized: true,
+    domains: ['fonts.gstatic.com'],
+  },
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    // Handle GLB files for 3D assets
+    config.module.rules.push({
+      test: /\.(glb|gltf)$/,
+      use: {
+        loader: 'file-loader',
+        options: {
+          publicPath: '/_next/static/models/',
+          outputPath: 'static/models/',
+        },
+      },
+    });
 
-module.exports = nextConfig
+    return config;
+  },
+  // Handle static assets
+  async rewrites() {
+    return [
+      {
+        source: '/assets/:path*',
+        destination: '/assets/:path*',
+      },
+    ];
+  },
+};
+
+module.exports = nextConfig;
