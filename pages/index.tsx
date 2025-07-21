@@ -92,7 +92,6 @@ export default function Resume() {
       </Head>
           
       <SplashCursor />  {/* ← activating splash cursor */}
-      
       <ContactLanyard />
 
       <div className={styles.body}>

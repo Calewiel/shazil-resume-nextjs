@@ -42,14 +42,12 @@ export default function ContactCard({
         }}
       >
         <div className="flex h-80 w-64 flex-col gap-3 rounded-3xl bg-slate-900 p-5">
-          {/* Profile Photo */}
-          <div className="flex justify-center mb-2">
-            <img 
-              src="/public/assets/profile.jpg" 
-              alt="Shazil Sindhu"
-              className="w-16 h-16 rounded-full object-cover border-2 border-white/20"
-            />
-          </div>
+          {/* Profile Photo - Placeholder */}
+<div className="flex justify-center mb-2">
+  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl">
+    S
+  </div>
+</div>
           
           {/* Name */}
           <div className="text-center">
