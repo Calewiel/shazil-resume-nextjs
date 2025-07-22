@@ -1,5 +1,17 @@
 /* styles/globals.css - CLEAN VERSION */
+/* Prevent any whitespace rendering */
+html, body {
+  font-size: 0; /* Removes whitespace between inline elements */
+}
 
+#__next {
+  font-size: 16px; /* Reset font size for content */
+}
+
+/* Ensure all your main content has proper font size */
+.Resume_body__inmh3 {
+  font-size: 16px;
+}
 /* Universal reset */
 *, *::before, *::after {
   box-sizing: border-box;
