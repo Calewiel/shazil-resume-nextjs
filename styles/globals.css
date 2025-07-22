@@ -1,90 +1,43 @@
+/* styles/globals.css - CLEAN VERSION */
 
-/* Import cute, modern fonts */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
-
-/* Alternative cute fonts (choose one of these) */
-/* @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&display=swap'); */
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  overflow: hidden;  /* Prevent scroll */
-  /* Primary choice: Modern and friendly */
-  font-family: 'Nunito', 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  
-  /* Alternative options: */
-  /* font-family: 'Poppins', 'Inter', sans-serif;    /* Clean and modern */
-  /* font-family: 'Quicksand', 'Nunito', sans-serif; /* Cute and rounded */
-  /* font-family: 'Comfortaa', 'Nunito', sans-serif; /* Very rounded and friendly */
-  /* font-family: 'Raleway', 'Inter', sans-serif;    /* Elegant and clean */
-  
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Enhanced typography for better readability */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-}
-
-.header h1 {
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
-
-.tagline {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-}
-
-/* Cute button and interactive elements styling */
-button, .contactItem {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 500;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
+/* Universal reset */
+*, *::before, *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* Prevent any scrolling */
+html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: #0f172a;
+  font-size: 16px;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: #0f172a;
+  color: #fff;
+  font-family: 'Inter', 'Nunito', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
 #__next {
-  height: 100vh;
-  overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: inherit;
+  position: relative;
 }
 
-/* Add some cute text styling classes */
-.cute-text {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.elegant-text {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-}
-
-.bold-text {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+/* Prevent default spacing */
+div, main, section, article, header, footer {
+  margin: 0;
+  padding: 0;
 }
