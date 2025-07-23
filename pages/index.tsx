@@ -449,19 +449,19 @@ export default function Resume() {
                     <span className={styles.badge}>🎓 EdTech</span>
                   </div>
                   <div className={styles.popupHighlight}>
-                    AI algorithms: <span className={styles.metric}>140% engagement</span> increase
+                    AI algorithms: <span className={styles.metric}>140% engagement increase</span>
                   </div>
                   <div className={styles.popupAchievement}>
-                    <span className={styles.icon}>🎯</span> <span className={styles.metric}>1M+ students</span>, <span className={styles.metric}>30% YoY</span> revenue growth
+                    <span className={styles.icon}>🎯</span> <span className={styles.metric}>1M+ students, 30% YoY revenue growth</span>
                   </div>
                   <div className={styles.popupAchievement}>
-                    <span className={styles.icon}>🚀</span> Google Classroom: <span className={styles.metric}>80%</span> market expansion
+                    <span className={styles.icon}>🚀</span><span className={styles.metric}>80% TAM expansion</span>
                   </div>
                   <div className={styles.popupAchievement}>
-                    <span className={styles.icon}>👥</span> Led <span className={styles.metric}>20+ team</span>, <span className={styles.metric}>50%</span> less delays
+                    <span className={styles.icon}>👥</span><span className={styles.metric}>Led team of 20+</span>
                   </div>
                   <div className={styles.popupAchievement}>
-                    <span className={styles.icon}>🐛</span> Bug bash: <span className={styles.metric}>40%</span> fewer issues
+                    <span className={styles.icon}>🐛</span><span className={styles.metric}>40% fewer issues after bugbash</span>
                   </div>
                 </div>
               </div>
