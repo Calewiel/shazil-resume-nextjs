@@ -96,6 +96,16 @@ const StatCard = ({ stat }) => {
 export default function Resume() {
   const heroRef = useRef(null);
   const statsRef = useRef(null);
+  const journeyRef = useRef(null);
+  const contactRef = useRef(null);
+
+  // Smooth scroll function
+  const scrollToSection = (ref) => {
+    ref.current?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -145,6 +155,110 @@ export default function Resume() {
     );
   }, []);
 
+  // Career nodes interaction and timeline animation
+  useEffect(() => {
+    const timeline = document.querySelector(`.${styles.timelineLine}`);
+    const careerNodes = document.querySelectorAll(`.${styles.careerNode}`);
+    
+    // Animate timeline on scroll
+    if (timeline) {
+      gsap.fromTo(timeline, 
+        { 
+          scaleX: 0,
+          transformOrigin: 'left center'
+        },
+        {
+          scaleX: 1,
+          duration: 2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: timeline,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    }
+
+    // Animate nodes appearing after timeline
+    careerNodes.forEach((node, index) => {
+      gsap.fromTo(node,
+        {
+          y: 50,
+          opacity: 0,
+          scale: 0.5
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          delay: 0.3 + (index * 0.2),
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: node,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    });
+    
+    careerNodes.forEach((node) => {
+      const handleMouseEnter = () => {
+        node.style.zIndex = '1000';
+        node.style.transform = 'scale(1.05)';
+        const popup = node.querySelector(`.${styles.infoPopup}`);
+        if (popup) {
+          popup.style.opacity = '1';
+          popup.style.visibility = 'visible';
+        }
+      };
+
+      const handleMouseLeave = () => {
+        node.style.zIndex = '10';
+        node.style.transform = 'scale(1)';
+        const popup = node.querySelector(`.${styles.infoPopup}`);
+        if (popup) {
+          popup.style.opacity = '0';
+          popup.style.visibility = 'hidden';
+        }
+      };
+
+      const handleClick = (e) => {
+        e.preventDefault();
+        const popup = node.querySelector(`.${styles.infoPopup}`);
+        
+        careerNodes.forEach((otherNode) => {
+          if (otherNode !== node) {
+            const otherPopup = otherNode.querySelector(`.${styles.infoPopup}`);
+            if (otherPopup) {
+              otherPopup.style.opacity = '0';
+              otherPopup.style.visibility = 'hidden';
+            }
+          }
+        });
+
+        if (popup) {
+          const isVisible = popup.style.opacity === '1';
+          popup.style.opacity = isVisible ? '0' : '1';
+          popup.style.visibility = isVisible ? 'hidden' : 'visible';
+        }
+      };
+
+      node.addEventListener('mouseenter', handleMouseEnter);
+      node.addEventListener('mouseleave', handleMouseLeave);
+      node.addEventListener('click', handleClick);
+
+      return () => {
+        node.removeEventListener('mouseenter', handleMouseEnter);
+        node.removeEventListener('mouseleave', handleMouseLeave);
+        node.removeEventListener('click', handleClick);
+      };
+    });
+  }, []);
+
   return (
     <>
       <Head>
@@ -186,7 +300,8 @@ export default function Resume() {
         
         {/* Main Content */}
         <div className={styles.pageContent}>
-          {/* Hero Section */}
+          
+          {/* SECTION 1: Hero + Impact Stats */}
           <section className={styles.heroSection} ref={heroRef}>
             <h1 className={styles.mainTitle}>Shazil Nazir Sindhu</h1>
             
@@ -222,19 +337,231 @@ export default function Resume() {
             </div>
           </section>
 
-          {/* Call to Action */}
+          {/* Scroll Button */}
           <section className={styles.ctaSection}>
             <button 
               className={styles.exploreButton}
-              onClick={() => {
-                // Add navigation logic here
-                console.log('Explore button clicked');
-              }}
+              onClick={() => scrollToSection(journeyRef)}
             >
-              Explore My Journey
-              <span className={styles.buttonIcon}>→</span>
+              ↓ Explore My Journey
+              <span className={styles.buttonIcon}>↓</span>
             </button>
           </section>
+
+          {/* SECTION 2: Career Journey */}
+          <section className={styles.journeySection} ref={journeyRef}>
+            <div className={styles.sectionTitle}>
+              <h2>🎯 Career Journey</h2>
+              <p>Hover over the nodes to explore my professional evolution</p>
+            </div>
+            
+            <div className={styles.careerMap}>
+              {/* Timeline Line */}
+              <div className={styles.timelineLine}></div>
+              
+              {/* Education Node */}
+              <div className={`${styles.careerNode} ${styles.educationNode}`}>
+                <div className={styles.nodeIcon}>🎓</div>
+                <div className={styles.nodeLabel}>Education</div>
+                <div className={`${styles.infoPopup} ${styles.educationPopup}`}>
+                  <div className={styles.popupDate}>2007 - 2011</div>
+                  <div className={styles.popupTitle}>Foundation</div>
+                  <div className={styles.popupCompany}>Lahore School of Economics</div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>🎓</span> BBA (Hons) - Marketing & Finance
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>📊</span> Built strategic & analytical foundations
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>🌟</span> Honors graduate
+                  </div>
+                </div>
+              </div>
+
+              {/* BridgeBlue Node */}
+              <div className={`${styles.careerNode} ${styles.bridgeblueNode}`}>
+                <div className={styles.nodeIcon}>🌏</div>
+                <div className={styles.nodeLabel}>BridgeBlue</div>
+                <div className={`${styles.infoPopup} ${styles.bridgebluePopup}`}>
+                  <div className={styles.popupDate}>June 2015 - July 2019</div>
+                  <div className={styles.popupTitle}>Lead Product Manager</div>
+                  <div className={styles.popupCompany}>AMS BridgeBlue • Sydney, Australia</div>
+                  <div className={styles.badges}>
+                    <span className={styles.badge}>🎓 EdTech</span>
+                    <span className={styles.badge}>🌏 International</span>
+                    <span className={styles.badge}>💼 B2B</span>
+                  </div>
+                  <div className={styles.popupHighlight}>
+                    Cross-university portal: <span className={styles.metric}>230% application increase</span>
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>💰</span> Generated <span className={styles.metric}>$17M+ revenue</span>
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>🌍</span> Led <span className={styles.metric}>3-country international team</span>
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>🚀</span> <span className={styles.metric}>40% velocity increase, 30% faster time-to-market</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Halfort Node */}
+              <div className={`${styles.careerNode} ${styles.halfortNode}`}>
+                <div className={styles.nodeIcon}>⚕️</div>
+                <div className={styles.nodeLabel}>Halfort</div>
+                <div className={`${styles.infoPopup} ${styles.halfortPopup}`}>
+                  <div className={styles.popupDate}>July 2019 - Sept 2023</div>
+                  <div className={styles.popupTitle}>Product Lead</div>
+                  <div className={styles.popupCompany}>Halfort LLC • Virginia</div>
+                  <div className={styles.badges}>
+                    <span className={styles.badge}>💰 FinTech</span>
+                    <span className={styles.badge}>🏥 HealthTech</span>
+                    <span className={styles.badge}>📱 SaaS</span>
+                  </div>
+                  <div className={styles.popupHighlight}>
+                    Payment platform: <span className={styles.metric}>90K MAUs</span>, <span className={styles.metric}>$10M revenue Year 1</span>
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>💳</span> Patient payments up <span className={styles.metric}>150%</span>
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>📈</span> <span className={styles.metric}>+35 NPS</span> improvement
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>🎥</span> Telehealth: <span className={styles.metric}>50% YoY</span> engagement boost
+                  </div>
+                </div>
+              </div>
+
+              {/* Stukent Node */}
+              <div className={`${styles.careerNode} ${styles.stukentNode}`}>
+                <div className={styles.nodeIcon}>🚀</div>
+                <div className={styles.nodeLabel}>Stukent</div>
+                <div className={`${styles.infoPopup} ${styles.stukentPopup}`}>
+                  <div className={styles.popupDate}>Oct 2019 - Present</div>
+                  <div className={styles.popupTitle}>Group Product Manager</div>
+                  <div className={styles.popupCompany}>Stukent • Idaho Falls</div>
+                  <div className={styles.badges}>
+                    <span className={styles.badge}>🤖 AI Innovation</span>
+                    <span className={styles.badge}>📊 Analytics</span>
+                    <span className={styles.badge}>🎓 EdTech</span>
+                  </div>
+                  <div className={styles.popupHighlight}>
+                    AI algorithms: <span className={styles.metric}>140% engagement</span> increase
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>🎯</span> <span className={styles.metric}>1M+ students</span>, <span className={styles.metric}>30% YoY</span> revenue growth
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>🚀</span> Google Classroom: <span className={styles.metric}>80%</span> market expansion
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>👥</span> Led <span className={styles.metric}>20+ team</span>, <span className={styles.metric}>50%</span> less delays
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>🐛</span> Bug bash: <span className={styles.metric}>40%</span> fewer issues
+                  </div>
+                </div>
+              </div>
+
+              {/* Framework Node */}
+              <div className={`${styles.careerNode} ${styles.frameworkNode}`}>
+                <div className={styles.nodeIcon}>🧠</div>
+                <div className={styles.nodeLabel}>S.C.A.L.E</div>
+                <div className={`${styles.infoPopup} ${styles.frameworkPopup}`}>
+                  <div className={styles.popupDate}>2024 - Present</div>
+                  <div className={styles.popupTitle}>S.C.A.L.E Framework</div>
+                  <div className={styles.popupCompany}>Thought Leadership</div>
+                  <div className={styles.badges}>
+                    <span className={styles.badge}>🚀 Innovation</span>
+                    <span className={styles.badge}>📚 Published</span>
+                    <span className={styles.badge}>💡 Framework</span>
+                  </div>
+                  <div className={styles.popupHighlight}>
+                    Comprehensive PM framework: Scalable, Customizable, Agile, Lean Execution
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>📉</span> <span className={styles.metric}>20-45%</span> reduction in project delays
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>📈</span> <span className={styles.metric}>15-30%</span> increase in on-time delivery
+                  </div>
+                  <div className={styles.popupAchievement}>
+                    <span className={styles.icon}>🌍</span> Adopted across multiple organizations
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* SECTION 3: Contact */}
+          <section className={styles.contactSection} ref={contactRef}>
+            <div className={styles.sectionTitle}>
+              <h2>💻 Let's Build Something Together</h2>
+              <p>Ready to transform your product vision into reality?</p>
+            </div>
+            
+            <div className={styles.contactContent}>
+              <div className={styles.codeEditor}>
+                <div className={styles.editorHeader}>
+                  <div className={styles.editorDots}>
+                    <span className={styles.dot} style={{background: '#ff5f56'}}></span>
+                    <span className={styles.dot} style={{background: '#ffbd2e'}}></span>
+                    <span className={styles.dot} style={{background: '#27ca3f'}}></span>
+                  </div>
+                  <div className={styles.editorTitle}>contact.js</div>
+                </div>
+                <div className={styles.editorContent}>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>1</span>
+                    <span className={styles.codeKeyword}>const</span> <span className={styles.codeVariable}>contact</span> = {'{'}
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>2</span>
+                    &nbsp;&nbsp;<span className={styles.codeProperty}>email</span>: <span className={styles.codeString}>"snsindhu@gmail.com"</span>,
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>3</span>
+                    &nbsp;&nbsp;<span className={styles.codeProperty}>phone</span>: <span className={styles.codeString}>"(804) 873-9174"</span>,
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>4</span>
+                    &nbsp;&nbsp;<span className={styles.codeProperty}>linkedin</span>: <span className={styles.codeString}>"in/shazilsindhu"</span>,
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>5</span>
+                    &nbsp;&nbsp;<span className={styles.codeProperty}>framework</span>: <span className={styles.codeString}>"scaleframework.notion.site"</span>
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>6</span>
+                    {'}'};
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>7</span>
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>8</span>
+                    <span className={styles.codeComment}>// Ready to scale your next big idea?</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className={styles.contactButtons}>
+                <a href="mailto:snsindhu@gmail.com" className={styles.contactButton}>
+                  📧 Send Email
+                </a>
+                <a href="tel:(804) 873-9174" className={styles.contactButton}>
+                  📱 Call Me
+                </a>
+                <a href="https://linkedin.com/in/shazilsindhu" target="_blank" rel="noopener noreferrer" className={styles.contactButton}>
+                  💼 LinkedIn
+                </a>
+              </div>
+            </div>
+          </section>
+          
         </div>
       </div>
     </>
