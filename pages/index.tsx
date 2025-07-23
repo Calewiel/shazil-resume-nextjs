@@ -30,7 +30,7 @@ const impactStats = [
   { label: "Revenue Generated", value: "$27M+", icon: "💰", color: "#34d399" },
   { label: "Team Members Led", value: "20+", icon: "🚀", color: "#f87171" },
   { label: "Countries Worked", value: "3", icon: "🌍", color: "#fbbf24" },
-  { label: "Years Experience", value: "13+", icon: "⏰", color: "#a78bfa" },
+  { label: "Years Experience", value: "10+", icon: "⏰", color: "#a78bfa" },
   { label: "Framework Created", value: "S.C.A.L.E", icon: "🎯", color: "#64748b" }
 ];
 

@@ -463,19 +463,19 @@
 }
 
 .halfortPopup {
-  top: -470px;
+  top: -460px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
 }
 
 .stukentPopup {
-  top: -490px;
+  top: -500px;
   left: 70%;
   transform: translateX(-50%) translateY(20px);
 }
 
 .frameworkPopup {
-  top: -470px;
+  top: -480px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
 }
@@ -777,17 +777,18 @@
   .careerMap {
     padding: 40px 20px;
     min-height: 350px;
+    gap: 4rem;
   }
   
   .nodeIcon {
-    width: 65px;
-    height: 65px;
-    font-size: 1.8rem;
+    width: 75px;
+    height: 75px;
+    font-size: 2rem;
   }
   
   .infoPopup {
-    min-width: 250px;
-    max-width: 280px;
+    min-width: 280px;
+    max-width: 320px;
   }
   
   .contactContent {
@@ -801,17 +802,26 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .heroSection {
-    padding: 3rem 1rem 1.2rem;
+    padding: 3rem 1rem 2rem;
+    min-height: 70vh;
+  }
+  
+  .mainTitle {
+    font-size: clamp(2rem, 8vw, 3.5rem);
   }
   
   .impactSection {
-    padding: 1.4rem 1rem;
+    padding: 2rem 1rem;
   }
   
   .sectionTitle {
     margin-bottom: 2rem;
+  }
+  
+  .sectionTitle h2 {
+    font-size: 1.8rem;
   }
   
   .statsGrid {
@@ -843,50 +853,81 @@
   
   .journeySection {
     padding: 2rem 1rem;
+    min-height: auto;
   }
   
+  /* Mobile Timeline - Vertical Layout */
   .careerMap {
-    padding: 40px 20px;
-    min-height: auto;
-    flex-direction: column;
-    gap: 3rem;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 3rem !important;
+    padding: 40px 20px !important;
+    max-width: 100% !important;
   }
   
   .timelineLine {
-    display: none;
+    display: none !important;
   }
   
   .careerNode {
-    position: static;
-    margin: 0;
-    width: 100%;
-    max-width: 300px;
+    position: static !important;
+    width: 100% !important;
+    max-width: 350px !important;
+    flex: none !important;
   }
   
   .nodeIcon {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     font-size: 1.8rem;
+    margin-bottom: 1rem;
   }
   
   .nodeLabel {
-    font-size: 1rem;
-    margin-top: 0.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #67e8f9;
   }
   
+  /* Mobile Popups - Always Visible */
   .infoPopup {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    margin-top: 1rem;
-    max-width: 100%;
-    top: auto;
-    left: auto;
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    margin-top: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    top: auto !important;
+    left: auto !important;
+    font-size: 0.9rem;
+  }
+  
+  .popupTitle {
+    font-size: 1.1rem;
+  }
+  
+  .popupCompany {
+    font-size: 0.9rem;
+  }
+  
+  .badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+  
+  .popupHighlight {
+    font-size: 0.85rem;
+    padding: 0.8rem;
+  }
+  
+  .popupAchievement {
+    font-size: 0.8rem;
   }
   
   .contactSection {
     padding: 2rem 1rem;
+    min-height: auto;
   }
   
   .codeEditor {
@@ -900,10 +941,68 @@
   
   .contactButtons {
     gap: 0.8rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
   .contactButton {
     padding: 0.7rem 1.5rem;
     font-size: 0.9rem;
+    flex: 1;
+    min-width: 140px;
+  }
+}
+
+/* Small Mobile Optimization */
+@media (max-width: 480px) {
+  .heroSection {
+    padding: 2rem 1rem;
+  }
+  
+  .mainTitle {
+    font-size: clamp(1.8rem, 9vw, 3rem);
+  }
+  
+  .tagline {
+    font-size: clamp(1rem, 3vw, 1.4rem);
+  }
+  
+  .impactSection {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .journeySection {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .careerMap {
+    gap: 2rem !important;
+    padding: 20px 10px !important;
+  }
+  
+  .nodeIcon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.6rem;
+  }
+  
+  .infoPopup {
+    padding: 16px;
+    font-size: 0.85rem;
+  }
+  
+  .contactSection {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .contactButtons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .contactButton {
+    width: 100%;
+    min-width: auto;
   }
 }
