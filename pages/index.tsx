@@ -65,78 +65,27 @@ const AnimatedCounter = ({ end, suffix = "", duration = 2 }) => {
   
   return (
     <span className={styles.animatedCounter}>
-      {isNumber ? `${count}${suffix}` : count}
+      {isNumber ? count + suffix : end}
     </span>
   );
 };
 
-// Impact card component
-const ImpactCard = ({ stat, index, style }) => {
-  const cardRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const card = cardRef.current;
-    if (!card) return;
-
-    gsap.fromTo(
-      card,
-      {
-        y: 60,
-        opacity: 0,
-        scale: 0.8,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        delay: index * 0.1,
-        ease: "back.out(1.7)",
-        onComplete: () => setIsVisible(true)
-      }
-    );
-
-    const handleMouseEnter = () => {
-      gsap.to(card, {
-        scale: 1.05,
-        y: -5,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-    };
-
-    const handleMouseLeave = () => {
-      gsap.to(card, {
-        scale: 1,
-        y: 0,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-    };
-
-    card.addEventListener('mouseenter', handleMouseEnter);
-    card.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      card.removeEventListener('mouseenter', handleMouseEnter);
-      card.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, [index]);
-
+// Stat card component
+const StatCard = ({ stat }) => {
   return (
     <div 
-      ref={cardRef}
       className={styles.impactCard}
-      style={style}
+      style={{ '--card-color': stat.color }}
     >
       <div className={styles.cardIcon}>{stat.icon}</div>
       <div className={styles.cardValue}>
-        {isVisible && (
+        {stat.value.includes('M') || stat.value.includes('+') ? (
           <AnimatedCounter 
             end={stat.value} 
             suffix={stat.value.includes('M') ? 'M+' : stat.value.includes('+') ? '+' : ''}
           />
+        ) : (
+          stat.value
         )}
       </div>
       <div className={styles.cardLabel}>{stat.label}</div>
@@ -169,89 +118,62 @@ export default function Resume() {
   }, []);
 
   useEffect(() => {
-    let cleanups = [];
-    const careerNodes = document.querySelectorAll(`.${styles.careerNode}`);
-    
-    careerNodes.forEach((node) => {
-      const handleMouseEnter = () => {
-        node.style.zIndex = '1000';
-        node.style.transform = 'scale(1.05)';
-        const popup = node.querySelector(`.${styles.infoPopup}`);
-        if (popup) {
-          popup.style.opacity = '1';
-          popup.style.visibility = 'visible';
+    const stats = statsRef.current;
+    if (!stats) return;
+
+    gsap.fromTo(
+      stats.children,
+      {
+        y: 50,
+        opacity: 0,
+        scale: 0.8,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: stats,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
         }
-      };
-
-      const handleMouseLeave = () => {
-        node.style.zIndex = '10';
-        node.style.transform = 'scale(1)';
-        const popup = node.querySelector(`.${styles.infoPopup}`);
-        if (popup) {
-          popup.style.opacity = '0';
-          popup.style.visibility = 'hidden';
-        }
-      };
-
-      const handleClick = (e) => {
-        e.preventDefault();
-        const popup = node.querySelector(`.${styles.infoPopup}`);
-        
-        careerNodes.forEach((otherNode) => {
-          if (otherNode !== node) {
-            const otherPopup = otherNode.querySelector(`.${styles.infoPopup}`);
-            if (otherPopup) {
-              otherPopup.style.opacity = '0';
-              otherPopup.style.visibility = 'hidden';
-            }
-          }
-        });
-
-        if (popup) {
-          const isVisible = popup.style.opacity === '1';
-          popup.style.opacity = isVisible ? '0' : '1';
-          popup.style.visibility = isVisible ? 'hidden' : 'visible';
-        }
-      };
-
-      node.addEventListener('mouseenter', handleMouseEnter);
-      node.addEventListener('mouseleave', handleMouseLeave);
-      node.addEventListener('click', handleClick);
-
-      cleanups.push(() => {
-        node.removeEventListener('mouseenter', handleMouseEnter);
-        node.removeEventListener('mouseleave', handleMouseLeave);
-        node.removeEventListener('click', handleClick);
-      });
-    });
-
-    return () => {
-      cleanups.forEach(cleanup => cleanup());
-    };
+      }
+    );
   }, []);
 
   return (
     <>
       <Head>
-        <title>Shazil Sindhu - Career Timeline</title>
+        <title>Shazil Sindhu - Product Leader</title>
+        <meta name="description" content="Strategic SaaS Product Leader specializing in AI-driven growth and 0→1 execution" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
       </Head>
 
       <SplashCursor />
       
-      <div className={styles.body}>
+      <div className={styles.resumePage}>
+        {/* Solid Background Layer */}
         <div style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           left: 0,
-          width: '100%',
-          height: '100%',
-          background: '#1a1a2e',
+          width: "100%", 
+          height: "100%",
+          background: "#1a1a2e",
           zIndex: 1
-        }}>
-          <Particles
-            particleColors={['#ffffff', '#667eea', '#764ba2']}
+        }} />
+        
+        {/* Particle Background */}
+        <div className={styles.particles}>
+          <Particles 
+            particleColors={["#ffffff", "#667eea", "#764ba2"]}
             particleCount={300}
             particleSpread={15}
             speed={0.3}
@@ -261,182 +183,58 @@ export default function Resume() {
             disableRotation={false}
           />
         </div>
+        
+        {/* Main Content */}
+        <div className={styles.pageContent}>
+          {/* Hero Section */}
+          <section className={styles.heroSection} ref={heroRef}>
+            <h1 className={styles.mainTitle}>Shazil Nazir Sindhu</h1>
+            
+            <div className={styles.heroStatements}>
+              <div className={styles.tagline}>
+                <TextType 
+                  text={heroStatements}
+                  typingSpeed={75}
+                  pauseDuration={1500}
+                  showCursor={true}
+                  cursorCharacter="|"
+                  loop={true}
+                />
+              </div>
+            </div>
+            
+            <div className={styles.subtitle}>
+              📧 snsindhu@gmail.com | 📱 (804) 873-9174 | 💼 in/shazilsindhu | 🌐 scaleframework.notion.site
+            </div>
+          </section>
 
-        <div className={styles.header}>
-          <h1>Shazil Nazir Sindhu</h1>
-          <div className={styles.tagline}>
-            Strategic SaaS Product Leader | AI-Driven Growth | 0→1 Execution
-          </div>
-          <div style={{
-            fontSize: '1.2em',
-            marginTop: '20px',
-            marginBottom: '10px',
-            color: '#ffffff'
-          }}>
-            <TextType
-              text={[
-                "Hello, I am Shazil.",
-                "Welcome to my interactive resume",
-                "Exploring innovation through product leadership",
-                "Building the future, one product at a time"
-              ]}
-              typingSpeed={75}
-              pauseDuration={1500}
-              showCursor={true}
-              cursorCharacter="|"
-              loop={true}
-            />
-          </div>
-          <div className={styles.contact}>
-            📧 snsindhu@gmail.com | 📱 (804) 873-9174 | 💼 in/shazilsindhu | 🌐 scaleframework.notion.site
-          </div>
-        </div>
+          {/* Impact Section */}
+          <section className={styles.impactSection}>
+            <div className={styles.sectionTitle}>
+              <h2>🏆 Career Impact</h2>
+              <p>Transforming ideas into measurable outcomes across multiple industries</p>
+            </div>
+            
+            <div className={styles.statsGrid} ref={statsRef}>
+              {impactStats.map((stat, index) => (
+                <StatCard key={index} stat={stat} />
+              ))}
+            </div>
+          </section>
 
-        <div className={styles.careerMap}>
-          {/* Education Node */}
-          <div className={`${styles.careerNode} ${styles.educationNode}`}>
-            <div className={styles.nodeIcon}>🎓</div>
-            <div className={`${styles.infoPopup} ${styles.educationPopup}`}>
-              <div className={styles.popupDate}>2007 - 2011</div>
-              <div className={styles.popupTitle}>Foundation</div>
-              <div className={styles.popupCompany}>Lahore School of Economics</div>
-              <div className={styles.popupAchievement}>
-                <span className={styles.icon}>🎓</span> BBA (Hons) - Marketing & Finance
-              </div>
-              <div className={styles.popupAchievement}>
-                <span className={styles.icon}>📊</span> Built strategic & analytical foundations
-              </div>
-              <div className={styles.popupAchievement}>
-                <span className={styles.icon}>🌟</span> Honors graduate
-              </div>
-            </div>
-          </div>
-
-          {/* BridgeBlue Node */}
-          <div className={`${styles.careerNode} ${styles.bridgeblueNode}`}>
-            <div className={styles.nodeIcon}>🌏</div>
-            <div className={`${styles.infoPopup} ${styles.bridgebluePopup}`}>
-              <div className={styles.popupDate}>June 2015 - July 2019</div>
-              <div className={styles.popupTitle}>Lead Product Manager</div>
-              <div className={styles.popupCompany}>AMS BridgeBlue • Sydney, Australia</div>
-              <div className={styles.badges}>
-                <span className={styles.badge}>🎓 EdTech</span>
-                <span className={styles.badge}>🌏 International</span>
-                <span className={styles.badge}>💼 B2B</span>
-              </div>
-              <div className={styles.popupHighlight}>
-                Cross-university portal: <span className={styles.metric}>230% application increase</span>
-              </div>
-              <div className={styles.popupHighlight}>
-                Data insights platform: <span className={styles.metric}>140% engagement boost</span>
-              </div>
-              <div className={styles.popupHighlight}>
-                Mobile-first redesign: <span className={styles.metric}>65% mobile adoption</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Halfort Node */}
-          <div className={`${styles.careerNode} ${styles.halfortNode}`}>
-            <div className={styles.nodeIcon}>🛠️</div>
-            <div className={`${styles.infoPopup} ${styles.halfortPopup}`}>
-              <div className={styles.popupDate}>August 2019 - September 2021</div>
-              <div className={styles.popupTitle}>Senior Product Manager</div>
-              <div className={styles.popupCompany}>Halfort • Richmond, VA</div>
-              <div className={styles.badges}>
-                <span className={styles.badge}>🏗️ Construction</span>
-                <span className={styles.badge}>🛠️ SaaS</span>
-                <span className={styles.badge}>📊 Analytics</span>
-              </div>
-              <div className={styles.popupHighlight}>
-                MVP to market leader: <span className={styles.metric}>$2.1M revenue</span>
-              </div>
-              <div className={styles.popupHighlight}>
-                Advanced analytics: <span className={styles.metric}>2000+ active users</span>
-              </div>
-              <div className={styles.popupHighlight}>
-                User experience: <span className={styles.metric}>4.7/5 satisfaction</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Stukent Node */}
-          <div className={`${styles.careerNode} ${styles.stukentNode}`}>
-            <div className={styles.nodeIcon}>🚀</div>
-            <div className={`${styles.infoPopup} ${styles.stukentPopup}`}>
-              <div className={styles.popupDate}>October 2021 - Present</div>
-              <div className={styles.popupTitle}>VP of Product</div>
-              <div className={styles.popupCompany}>Stukent • Idaho Falls, ID</div>
-              <div className={styles.badges}>
-                <span className={styles.badge}>🎓 EdTech</span>
-                <span className={styles.badge}>🤖 AI/ML</span>
-                <span className={styles.badge}>📊 Analytics</span>
-              </div>
-              <div className={styles.popupHighlight}>
-                AI-powered platform: <span className={styles.metric}>$25M ARR growth</span>
-              </div>
-              <div className={styles.popupHighlight}>
-                Student engagement: <span className={styles.metric}>800K+ learners</span>
-              </div>
-              <div className={styles.popupHighlight}>
-                Product suite: <span className={styles.metric}>15+ integrated tools</span>
-              </div>
-            </div>
-          </div>
-
-          {/* S.C.A.L.E Framework Node */}
-          <div className={`${styles.careerNode} ${styles.frameworkNode}`}>
-            <div className={styles.nodeIcon}>🎯</div>
-            <div className={`${styles.infoPopup} ${styles.frameworkPopup}`}>
-              <div className={styles.popupDate}>2023 - Present</div>
-              <div className={styles.popupTitle}>S.C.A.L.E Framework</div>
-              <div className={styles.popupCompany}>Product Management Innovation</div>
-              <div className={styles.popupHighlight}>
-                <strong>S</strong>trategy - Vision & roadmapping
-              </div>
-              <div className={styles.popupHighlight}>
-                <strong>C</strong>ustomer - User-centric design
-              </div>
-              <div className={styles.popupHighlight}>
-                <strong>A</strong>nalytics - Data-driven decisions
-              </div>
-              <div className={styles.popupHighlight}>
-                <strong>L</strong>eadership - Team collaboration
-              </div>
-              <div className={styles.popupHighlight}>
-                <strong>E</strong>xecution - Delivery excellence
-              </div>
-            </div>
-          </div>
-
-          {/* Legend */}
-          <div className={styles.legend}>
-            <h3>🎯 Career Impact</h3>
-            <div className={styles.statItem}>
-              <span className={styles.statLabel}>Total Users Served</span>
-              <span className={styles.statValue}>1M+</span>
-            </div>
-            <div className={styles.statItem}>
-              <span className={styles.statLabel}>Revenue Generated</span>
-              <span className={styles.statValue}>$27M+</span>
-            </div>
-            <div className={styles.statItem}>
-              <span className={styles.statLabel}>Team Members Led</span>
-              <span className={styles.statValue}>20+</span>
-            </div>
-            <div className={styles.statItem}>
-              <span className={styles.statLabel}>Countries Worked</span>
-              <span className={styles.statValue}>3</span>
-            </div>
-            <div className={styles.statItem}>
-              <span className={styles.statLabel}>Years Experience</span>
-              <span className={styles.statValue}>13+</span>
-            </div>
-            <div className={styles.statItem}>
-              <span className={styles.statLabel}>Framework Created</span>
-              <span className={styles.statValue}>S.C.A.L.E</span>
-            </div>
-          </div>
+          {/* Call to Action */}
+          <section className={styles.ctaSection}>
+            <button 
+              className={styles.exploreButton}
+              onClick={() => {
+                // Add navigation logic here
+                console.log('Explore button clicked');
+              }}
+            >
+              Explore My Journey
+              <span className={styles.buttonIcon}>→</span>
+            </button>
+          </section>
         </div>
       </div>
     </>
