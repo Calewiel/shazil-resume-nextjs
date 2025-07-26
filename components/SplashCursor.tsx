@@ -1026,9 +1026,9 @@ let pointers = [createPointer()];
 
     function generateColor() {
       let c = HSVtoRGB(Math.random(), 1.0, 1.0);
-      c.r *= 0.15;
-      c.g *= 0.15;
-      c.b *= 0.15;
+      c.r *= 0.1;
+      c.g *= 0.1;
+      c.b *= 0.1;
       return c;
     }
 
