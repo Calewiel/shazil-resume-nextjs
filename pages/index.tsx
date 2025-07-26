@@ -516,7 +516,7 @@ export default function Resume() {
                 <div className={styles.editorContent}>
                   <div className={styles.codeLine}>
                     <span className={styles.lineNumber}>1</span>
-                    <span className={styles.codeKeyword}>const</span> <span className={styles.codeVariable}>contact</span> = {'{'}
+                    <span className={styles.codeKeyword}>const contact</span> <span className={styles.codeVariable}></span> = {'{'}
                   </div>
                   <div className={styles.codeLine}>
                     <span className={styles.lineNumber}>2</span>
@@ -549,16 +549,19 @@ export default function Resume() {
               </div>
               
               <div className={styles.contactButtons}>
-                <a href="mailto:snsindhu@gmail.com" className={styles.contactButton}>
-                  📧 Send Email
-                </a>
-                <a href="tel:(804) 873-9174" className={styles.contactButton}>
-                  📱 Call Me
-                </a>
-                <a href="https://linkedin.com/in/shazilsindhu" target="_blank" rel="noopener noreferrer" className={styles.contactButton}>
-                  💼 LinkedIn
-                </a>
-              </div>
+  <a href="mailto:snsindhu@gmail.com" className={styles.contactButton}>
+    📧 Send Email
+  </a>
+  <a href="tel:(804) 873-9174" className={styles.contactButton}>
+    📱 Call Me
+  </a>
+  <a href="https://linkedin.com/in/shazilsindhu" target="_blank" rel="noopener noreferrer" className={styles.contactButton}>
+    💼 LinkedIn
+  </a>
+  <a href="/Shazil-Sindhu-Product-Manager-Resume.pdf" download className={styles.contactButton}>
+    📄 Download Resume
+  </a>
+</div>
             </div>
           </section>
           
