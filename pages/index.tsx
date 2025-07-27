@@ -8,6 +8,7 @@ import styles from '../styles/Resume.module.css';
 import Particles from '../components/Particles';
 import SplashCursor from '../components/SplashCursor';
 import TextType from '../components/TextType';
+import ShazilAI from '../components/ShazilAI';
 
 // Register GSAP plugin
 if (typeof window !== 'undefined') {
@@ -566,6 +567,7 @@ export default function Resume() {
           </section>
           
         </div>
+      <ShazilAI />
       </div>
     </>
   );
