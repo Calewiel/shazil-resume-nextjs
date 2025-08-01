@@ -152,7 +152,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: 'claude-3-5-sonnet-20241022', // Using the newest fast model
-        max_tokens: 5000, // Increased for better responses
+        max_tokens: 8000, // Increased for better responses
         temperature: 0.1, // Low temperature for accuracy
         system: systemPrompt,
         messages: [

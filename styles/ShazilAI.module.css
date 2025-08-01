@@ -401,3 +401,41 @@
     font-size: 0.9rem;
   }
 }
+/* Add to styles/ShazilAI.module.css */
+
+.aiSection {
+  position: relative;
+  z-index: 10;
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 3rem;
+  scroll-margin-top: 100px; /* Prevents auto-scroll to this section */
+}
+
+/* Prevent body scroll when chat is active */
+.chatContainer {
+  background: rgba(17, 24, 39, 0.6);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Ensure proper positioning context */
+}
+
+.messages {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overscroll-behavior: contain; /* Prevents scroll chaining */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
