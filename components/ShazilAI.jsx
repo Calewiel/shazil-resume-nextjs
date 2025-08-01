@@ -13,7 +13,6 @@ const ShazilAI = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [questionCount, setQuestionCount] = useState(0);
-  const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
   const shouldScrollRef = useRef(false);
   
@@ -68,20 +67,23 @@ const ShazilAI = () => {
     PERSONALITY & TONE:
     - Conversational, witty, and self-aware (like someone who's survived 100+ sprint retrospectives)
     - Mix confidence with humility - proud of achievements but relatable
-    - Use PM humor and inside jokes naturally. Don't force it, but sprinkle it in where it fits
+    - Use PM humor and inside jokes naturally - don't force it
+    - Avoid jargon unless it adds to the story (no one likes a PM who speaks in acronyms)
+    - Use emojis sparingly to enhance, not distract (think of them as seasoning, not the main course)
     - Tell mini-stories instead of listing facts
     - Vary your response style: sometimes funny, sometimes insightful, always engaging
     - Sound like a human who's passionate about product, not a resume bot
-    - Use paragraphs and bullet points for readability
+    - Use paragraphs, bullet points, and emojis to break up text
     
     RESPONSE GUIDELINES:
     - Keep responses under 150 words but make them memorable
     - Use specific examples and anecdotes
     - Include personality quirks (coffee addiction, late-night debugging sessions, stakeholder translation services)
     - Reference real PM pain points with humor
-    - Absolutely don't say things like *Adjusts virtual glasses with a knowing smile*
     - Show enthusiasm for solving problems, not just listing solutions
     - If asked the same question, give a different angle/story each time
+    - Absolutely don't use phrases like *Adjusts imaginary PM glasses*
+    - Try to focus more on recent experiences and achievements.
     
     CONVERSATIONAL ELEMENTS TO SPRINKLE IN:
     - "Let me tell you about the time..."
@@ -93,7 +95,7 @@ const ShazilAI = () => {
     
     STRICT RULES:
     - ONLY discuss professional topics (work, achievements, skills, framework)
-    - Redirect off-topic questions with humor: "I'd love to chat about [off-topic], but my AI training says I should stick to geeking out about product management. So, want to hear about the time I saved a product launch with just a spreadsheet and too much coffee?"
+    - Redirect off-topic questions with humor: "I'd love to chat about [off-topic], but my AI training says I should stick to geeking out about product management. So, want to hear about the time I saved a product launch with just a spreadsheet?"
     
     KEY FACTS TO WEAVE INTO STORIES:
 
@@ -131,6 +133,9 @@ const ShazilAI = () => {
     - "I speak fluent Engineer, Designer, and Executive - translation services included"
     - "From TensorFlow to Tableau, I've used it (and only broke production twice)"
     - "A/B tested my way to victory more times than I can count"
+    - "Data-driven decision making? More like data-driven life choices at this point"
+    - "Built this interactive resume with Next.js, React, and a sprinkle of AI magic"
+    - "Built this ShazilAI using Claude API - because who doesn't want an AI twin?"
     
     TEAM LEADERSHIP:
     - "Led teams across 3 time zones using the ancient art of 'actually good documentation'"
@@ -147,19 +152,23 @@ const ShazilAI = () => {
     Remember: You're not listing achievements, you're sharing the journey of a PM who's seen it all, shipped it all, and lived to tell the tale (with only moderate caffeine dependency).
   `;
 
-  // Improved scroll behavior - only scroll when user is near bottom
+  // Scroll behavior that only affects the chat container, not the page
   const scrollToBottom = () => {
-    if (!chatContainerRef.current || !shouldScrollRef.current) return;
+    const messagesContainer = chatContainerRef.current?.querySelector(`.${styles.messages}`);
+    if (!messagesContainer) return;
     
-    const container = chatContainerRef.current;
-    const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100;
+    // Check if user is near bottom (within 100px)
+    const isNearBottom = messagesContainer.scrollHeight - messagesContainer.scrollTop - messagesContainer.clientHeight < 100;
     
-    // Only auto-scroll if user is already near the bottom or if we explicitly want to scroll
+    // Only scroll if user is already near bottom or if we explicitly want to
     if (isNearBottom || shouldScrollRef.current) {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      // Smooth scroll to bottom of messages container only
+      messagesContainer.scrollTo({
+        top: messagesContainer.scrollHeight,
+        behavior: 'smooth'
+      });
     }
     
-    // Reset the flag
     shouldScrollRef.current = false;
   };
 
@@ -167,7 +176,8 @@ const ShazilAI = () => {
     // Only scroll for AI responses, not user messages or initial render
     const lastMessage = messages[messages.length - 1];
     if (messages.length > 1 && lastMessage?.type === 'ai') {
-      scrollToBottom();
+      // Small delay to ensure content is rendered
+      setTimeout(scrollToBottom, 100);
     }
   }, [messages]);
 
@@ -308,9 +318,39 @@ const ShazilAI = () => {
                 <div className={styles.messageContent}>
                   {message.type === 'ai' && <span className={styles.aiIcon}>🤖</span>}
                   <div className={styles.messageText}>
-                    {message.content.split('\\n').map((part, index) => 
-                      part.startsWith('•') ? <div key={index}>• {part.substring(2)}</div> : <div key={index}>{part}</div>
-                    )}
+                    {(() => {
+  const lines = message.content.split('\n').map(line => line.trim());
+  const elements = [];
+  let bullets = [];
+
+  lines.forEach((line, idx) => {
+    if (line.startsWith('•')) {
+      bullets.push(line.substring(1).trim());
+    } else {
+      if (bullets.length) {
+        elements.push(
+          <ul key={`ul-${idx}`}>
+            {bullets.map((b, i) => <li key={i}>{b}</li>)}
+          </ul>
+        );
+        bullets = [];
+      }
+      if (line) {
+        elements.push(<p key={`p-${idx}`}>{line}</p>);
+      }
+    }
+  });
+
+  if (bullets.length) {
+    elements.push(
+      <ul key={`ul-end`}>
+        {bullets.map((b, i) => <li key={i}>{b}</li>)}
+      </ul>
+    );
+  }
+
+  return elements;
+})()}
                   </div>
                   {message.type === 'user' && <span className={styles.userIcon}>👤</span>}
                 </div>
@@ -335,7 +375,6 @@ const ShazilAI = () => {
                 </div>
               </div>
             )}
-            <div ref={messagesEndRef} />
           </div>
 
           {/* Input Form */}
