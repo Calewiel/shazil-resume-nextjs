@@ -31,11 +31,11 @@ function generateFallbackResponse(message) {
   if (lowerMessage.includes('scale') || lowerMessage.includes('framework')) {
     return `The S.C.A.L.E framework is Shazil's signature product management methodology focusing on:
 
-**S**calable - Building systems that grow with your product
-**C**ustomizable - Adapting to different team needs  
-**A**gile - Embracing iterative development
-**L**ean - Eliminating waste and focusing on value
-**E**xecution - Driving results through clear action
+Scalable - Building systems that grow with your product
+Customizable - Adapting to different team needs  
+Agile - Embracing iterative development
+Lean - Eliminating waste and focusing on value
+Execution - Driving results through clear action
 
 This framework has achieved:
 • 20-45% reduction in project delays
@@ -48,7 +48,7 @@ For detailed discussions, reach out to Shazil directly at snsindhu@gmail.com`;
   }
   
   if (lowerMessage.includes('experience') || lowerMessage.includes('background')) {
-    return `Shazil has 13+ years of product management experience:
+    return `Shazil has 10+ years of product management experience:
 
 🎯 **Current Role**: Group Product Manager at Stukent (EdTech)
 📈 **Key Achievements**: 
@@ -114,7 +114,7 @@ Want to discuss growth strategies? Reach out: snsindhu@gmail.com`;
   // Default response
   return `Thanks for your question about Shazil! I'd love to help you learn more about his:
 
-🚀 **13+ years** of product management experience
+🚀 **10+ years** of product management experience
 💼 **Leadership** of 20+ person cross-functional teams  
 📊 **S.C.A.L.E framework** adopted by multiple organizations
 🌍 **International experience** across 3 countries (Pakistan, Australia, US)

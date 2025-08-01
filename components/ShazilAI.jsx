@@ -6,7 +6,7 @@ const ShazilAI = () => {
   const [messages, setMessages] = useState([
     {
       type: 'ai',
-      content: "👋 Hi! I'm Shazil's AI assistant. I know all about his 13+ years in product management, the S.C.A.L.E framework he created, and his experience scaling products to $27M+ revenue. What would you like to know?"
+      content: "👋 Hi! I'm Shazil's AI assistant. I know all about his 10+ years in product management, the S.C.A.L.E framework he created, and his experience scaling products. What would you like to know?"
       // No timestamp to prevent hydration issues
     }
   ]);
@@ -53,7 +53,7 @@ const ShazilAI = () => {
   // Conversation starters
   const conversationStarters = [
     "Tell me about Shazil's biggest product wins",
-    "How did he increase revenue by $27M+?",
+    "Why should I hire Shazil?",
     "What is the S.C.A.L.E framework?",
     "What's his experience with AI and machine learning?",
     "How did he scale teams across 3 countries?"
@@ -70,9 +70,9 @@ const ShazilAI = () => {
     - Keep responses focused, professional, and under 100 words. Be concise but complete.
     - Answer in 2-3 bullet points maximum. Be direct and factual.
     - Always end off-topic redirections with: "What would you like to know about Shazil's career?"
-    - Be conversational but professional - use bullet points for clarity
+    - Be conversational but professional - use bullet points for clarity.
     
-    TONE: Professional but friendly, enthusiastic about his achievements, helpful to recruiters and potential collaborators.
+    TONE: Natural, Human, Professional but friendly, enthusiastic about his achievements, helpful to recruiters and potential collaborators. Explain the achievements in a way that sounds impressive and not fake.
     
     100% ACCURATE FACTS ABOUT SHAZIL:
     
@@ -130,7 +130,7 @@ const ShazilAI = () => {
     - Product Tools: Jira, Confluence, Notion, Figma
     
     KEY METRICS:
-    - 13+ years product management experience
+    - 10+ years product management experience
     - $27M+ total revenue generated
     - 1M+ users served
     - 20+ team members led

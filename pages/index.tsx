@@ -18,9 +18,8 @@ if (typeof window !== 'undefined') {
 // Hero statements that rotate
 const heroStatements = [
   "I build delightful user experiences",
-  "Scaled products from concept to $27M+ revenue", 
+  "Scaled products from concept to go-to-market", 
   "Led international teams across 3 countries",
-  "Increased user engagement by 140%+",
   "Created frameworks adopted by enterprise teams",
   "Served 1M+ users with innovative solutions"
 ];
@@ -28,7 +27,7 @@ const heroStatements = [
 // Career impact stats
 const impactStats = [
   { label: "Total Users Served", value: "1M+", icon: "👥", color: "#60a5fa" },
-  { label: "Revenue Generated", value: "$27M+", icon: "💰", color: "#34d399" },
+  { label: "Products Launched", value: "15+", icon: "💰", color: "#34d399" },
   { label: "Team Members Led", value: "20+", icon: "🚀", color: "#f87171" },
   { label: "Countries Worked", value: "3", icon: "🌍", color: "#fbbf24" },
   { label: "Years Experience", value: "10+", icon: "⏰", color: "#a78bfa" },
@@ -348,7 +347,7 @@ export default function Resume() {
               <span className={styles.buttonIcon}>↓</span>
             </button>
           </section>
-
+<ShazilAI />
           {/* SECTION 2: Career Journey */}
           <section className={styles.journeySection} ref={journeyRef}>
             <div className={styles.sectionTitle}>
@@ -567,7 +566,7 @@ export default function Resume() {
           </section>
           
         </div>
-      <ShazilAI />
+      
       </div>
     </>
   );
