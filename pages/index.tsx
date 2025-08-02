@@ -319,8 +319,12 @@ export default function Resume() {
             </div>
             
             <div className={styles.subtitle}>
-              📧 snsindhu@gmail.com | 📱 (804) 873-9174 | 💼 in/shazilsindhu | 🌐 scaleframework.notion.site
+              <p className={styles.availabilityLine}>
+    Available for new opportunities • Open to remote & hybrid roles (San Jose, CA)
+  </p>
+              Strategic SaaS Product Leader | AI, Healthtech, EdTech & Growth Expert | Scaling Teams & Products
             </div>
+            
           </section>
 
           {/* Impact Section */}

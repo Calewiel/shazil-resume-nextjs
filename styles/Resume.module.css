@@ -1006,3 +1006,11 @@
     min-width: auto;
   }
 }
+.availabilityLine {
+  color: #7dd3fc; /* Match your existing subtitle color */
+  font-size: 1.2rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  margin-top: 0.5rem;
+  opacity: 0.95;
+}
