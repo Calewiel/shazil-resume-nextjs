@@ -453,7 +453,7 @@ export default function Resume() {
                     <span className={styles.badge}>🎓 EdTech</span>
                   </div>
                   <div className={styles.popupHighlight}>
-                    AI algorithms: <span className={styles.metric}>140% engagement increase</span>
+                    Scoring algorithms: <span className={styles.metric}>22% increase in learning outcomes</span>
                   </div>
                   <div className={styles.popupAchievement}>
                     <span className={styles.icon}>🎯</span> <span className={styles.metric}>1M+ students, 30% YoY revenue growth</span>
@@ -462,7 +462,7 @@ export default function Resume() {
                     <span className={styles.icon}>🚀</span><span className={styles.metric}>80% TAM expansion</span>
                   </div>
                   <div className={styles.popupAchievement}>
-                    <span className={styles.icon}>👥</span><span className={styles.metric}>Led team of 20+</span>
+                    <span className={styles.icon}>👥</span><span className={styles.metric}>Led team of 7+</span>
                   </div>
                   <div className={styles.popupAchievement}>
                     <span className={styles.icon}>🐛</span><span className={styles.metric}>40% fewer issues after bugbash</span>
